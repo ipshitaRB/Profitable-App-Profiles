@@ -19,5 +19,16 @@ def explore_data(dataset, start, end, rows_and_columns=False):
         print('Number of rows:', len(dataset))
         print('Number of columns:', len(dataset[0]))
         
-explore_data(ios_app_data, 0, 5)
-explore_data(android_app_data, 0, 5)
+explore_data(ios_app_data, 0, 5, True)
+explore_data(android_app_data, 0, 5, True)
+
+# locate row with error - category missing 
+explore_data(android_app_data, 10473, 10474)
+
+# delete row with error
+del android_app_data[10473]
+
+# confirm deletion
+explore_data(android_app_data, 10473, 10474)
+
+
