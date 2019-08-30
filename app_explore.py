@@ -31,4 +31,17 @@ del android_app_data[10473]
 # confirm deletion
 explore_data(android_app_data, 10473, 10474)
 
+duplicate_apps = []
+unique_apps = []
+
+for app in android_app_data:
+    name = app[0]
+    if name in unique_apps:
+        duplicate_apps.append(name)
+    else:
+        unique_apps.append(name)
+        
+print('Number of duplicate apps: ', len(duplicate_apps))
+
+
 
