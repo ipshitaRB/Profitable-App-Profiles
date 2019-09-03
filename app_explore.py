@@ -71,9 +71,13 @@ print("Is the number of non duplicate rows 9659 : ", len(android_clean) == 9659)
 
 def is_english(input):
     """ check whether a string is in English or not """
+    out_of_range_num = 0
     for char in input:
         if ord(char) > 127:
-            return False
+            if out_of_range_num > 3:
+                return False
+            out_of_range_num += 1
+            
     return True
 
 # Test is_english function
@@ -84,6 +88,7 @@ def test_is_english(input):
     
 test_is_english("Instagram")
 test_is_english('爱奇艺PPS -《欢乐颂2》电视剧热播')
+test_is_english('Docs To Go™ Free Office Suite')
     
         
 
