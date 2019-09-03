@@ -43,5 +43,33 @@ for app in android_app_data:
         
 print('Number of duplicate apps: ', len(duplicate_apps))
 
+# empty dictionary of app name with highest number of reviews
+reviews_max = {}
+
+for app in android_app_data[1:]:
+    name = app[0]
+    n_reviews = float(app[3])
+    if name in reviews_max:
+        if reviews_max[name] < n_reviews:
+            reviews_max[name] = n_reviews
+    else:
+        reviews_max[name] = n_reviews
+        
+print(len(reviews_max))
+
+android_clean = []
+already_added = []
+
+for app in android_app_data[1:]:
+    name = app[0]
+    n_reviews = float(app[3])
+    if n_reviews == reviews_max[name] and name not in already_added:
+        android_clean.append(app)
+        already_added.append(name)
+
+print("Is the number of non duplicate rows 9659 : ", len(android_clean) == 9659)
+    
+        
+
 
 
