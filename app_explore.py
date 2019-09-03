@@ -68,6 +68,22 @@ for app in android_app_data[1:]:
         already_added.append(name)
 
 print("Is the number of non duplicate rows 9659 : ", len(android_clean) == 9659)
+
+def is_english(input):
+    """ check whether a string is in English or not """
+    for char in input:
+        if ord(char) > 127:
+            return False
+    return True
+
+# Test is_english function
+def test_is_english(input):
+    statement = " Is '{}' English?"
+    outcome = is_english(input)
+    print(statement.format(input), outcome)
+    
+test_is_english("Instagram")
+test_is_english('爱奇艺PPS -《欢乐颂2》电视剧热播')
     
         
 
