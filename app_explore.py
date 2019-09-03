@@ -74,10 +74,10 @@ def is_english(input):
     out_of_range_num = 0
     for char in input:
         if ord(char) > 127:
-            if out_of_range_num > 3:
-                return False
-            out_of_range_num += 1
             
+            out_of_range_num += 1
+    if out_of_range_num > 3:
+                return False        
     return True
 
 # Test is_english function
@@ -89,8 +89,23 @@ def test_is_english(input):
 test_is_english("Instagram")
 test_is_english('爱奇艺PPS -《欢乐颂2》电视剧热播')
 test_is_english('Docs To Go™ Free Office Suite')
-    
+
+ios_english = []
+android_english = []
+
+for app in ios_app_data[1:]:
+    name = app[2]
+    if is_english(name):
+        ios_english.append(app)
         
+for app in android_clean:
+    name = app[0]
+    if is_english(name):
+        android_english.append(app)
+        
+explore_data(android_english, 0, 3, True)
+print('\n')
+explore_data(ios_english, 0, 3, True)
 
 
 
