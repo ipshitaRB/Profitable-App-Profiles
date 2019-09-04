@@ -107,5 +107,61 @@ explore_data(android_english, 0, 3, True)
 print('\n')
 explore_data(ios_english, 0, 3, True)
 
+android_price_index = 7
+ios_price_index = 5
+
+android_free = []
+ios_free = []
+
+for app in android_english:
+    price = app[android_price_index]
+    if price == '0':
+        android_free.append(app)
+
+for app in ios_english:
+    price = app[ios_price_index]
+    if price == '0.0' or price == '0':
+        ios_free.append(app)
 
 
+print('Number of free Android apps : ', len(android_free))
+print('Number of free ios apps : ', len(ios_free))
+
+# create frequency table for genre
+
+ios_genre_freq = dict()
+android_genre_freq = dict()
+
+ios_genre_index = 12
+android_genre_index = 9
+
+for app in android_free:
+    genre = app[android_genre_index]
+    
+    if genre in android_genre_freq:
+        android_genre_freq[genre] += 1
+    else:
+        android_genre_freq[genre] = 1
+        
+android_genre_freq = sorted(android_genre_freq.items(), key = 
+             lambda kv:(kv[1], kv[0]), reverse = True)
+
+print("\nFrequencies of genres in Android Apps : \n")
+
+for app, frequency in android_genre_freq:
+    print("{} : {}".format(app, frequency))
+
+
+for app in ios_free:
+    genre = app[ios_genre_index]
+    if genre in ios_genre_freq:
+        ios_genre_freq[genre] += 1
+    else:
+        ios_genre_freq[genre] = 1
+
+ios_genre_freq = sorted(ios_genre_freq.items(), key = 
+             lambda kv:(kv[1], kv[0]), reverse = True)
+print("\nFrequencies of genres in iOS Apps : \n")
+
+for app, frequency in ios_genre_freq:
+    print("{} : {}".format(app, frequency))
