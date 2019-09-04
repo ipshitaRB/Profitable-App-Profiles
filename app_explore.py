@@ -145,20 +145,22 @@ def freq_table(dataset, index):
         freq_percentages[key] = (freq_table[key] * 100) / total
     return freq_percentages
 
-def display_table(dataset, index, platform):
+def display_table(dataset, index, column_name, platform):
     percentages = freq_table(dataset, index)
     percentage_sorted = sorted(percentages.items(), key = 
              lambda kv:(kv[1], kv[0]), reverse = True)
 
-    print("\nFrequencies of genres in {} Apps : \n".format(platform))
+    print("\nFrequencies of {} in {} Apps : \n".format(column_name, platform))
 
     for app, frequency in percentage_sorted:
         print("{} : {}".format(app, frequency))
 
 
 
-ios_genre_index = 12
+ios_genre_index = -5
 android_genre_index = 9
+android_category_index = 1
 
-display_table(ios_free, ios_genre_index, "iOS")
-display_table(android_free, android_genre_index, "Android")
+display_table(ios_free, ios_genre_index,"prime genre", "iOS")
+display_table(android_free, android_genre_index,"genre", "Android")
+display_table(android_free, android_category_index,"category", "Android")
