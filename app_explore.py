@@ -179,3 +179,22 @@ for genre in genres_ios:
             len_genre += 1
     average_rating = total / len_genre
     print(genre, " : ", average_rating)
+    
+print('\nAverage number of installs for each Android Category\n')
+category_android = freq_table(android_free, android_category_index)
+
+for category in category_android:
+    total = 0
+    len_category = 0
+    for app in android_free:
+        category_app = app[android_category_index]
+        if category_app == category:
+            num_installs = app[5]
+            num_installs = num_installs.replace('+','')
+            num_installs = num_installs.replace(',','')
+            num_installs = float(num_installs)
+            total += num_installs
+            len_category += 1
+    average_installs = total / len_category
+    print(category,":",average_installs)
+    
