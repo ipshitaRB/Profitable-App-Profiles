@@ -164,3 +164,18 @@ android_category_index = 1
 display_table(ios_free, ios_genre_index,"prime genre", "iOS")
 display_table(android_free, android_genre_index,"genre", "Android")
 display_table(android_free, android_category_index,"category", "Android")
+
+print("\nAverage user ratings of ios Prime Genres\n")
+genres_ios = freq_table(ios_free, ios_genre_index)
+
+for genre in genres_ios:
+    total = 0
+    len_genre = 0
+    for app in ios_free:
+        genre_app = app[ios_genre_index]
+        if genre_app == genre:
+            num_ratings = float(app[6])
+            total += num_ratings
+            len_genre += 1
+    average_rating = total / len_genre
+    print(genre, " : ", average_rating)
