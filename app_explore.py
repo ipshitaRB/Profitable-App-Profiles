@@ -127,41 +127,38 @@ for app in ios_english:
 print('Number of free Android apps : ', len(android_free))
 print('Number of free ios apps : ', len(ios_free))
 
-# create frequency table for genre
+# create frequency table function
 
-ios_genre_freq = dict()
-android_genre_freq = dict()
+def freq_table(dataset, index):
+    freq_table = {}
+    total = 0
+    for app in dataset:
+        total += 1
+        column = app[index]
+        if column in freq_table:
+            freq_table[column] += 1
+        else:
+            freq_table[column] = 1
+    
+    freq_percentages = {}
+    for key in freq_table:
+        freq_percentages[key] = (freq_table[key] * 100) / total
+    return freq_percentages
+
+def display_table(dataset, index, platform):
+    percentages = freq_table(dataset, index)
+    percentage_sorted = sorted(percentages.items(), key = 
+             lambda kv:(kv[1], kv[0]), reverse = True)
+
+    print("\nFrequencies of genres in {} Apps : \n".format(platform))
+
+    for app, frequency in percentage_sorted:
+        print("{} : {}".format(app, frequency))
+
+
 
 ios_genre_index = 12
 android_genre_index = 9
 
-for app in android_free:
-    genre = app[android_genre_index]
-    
-    if genre in android_genre_freq:
-        android_genre_freq[genre] += 1
-    else:
-        android_genre_freq[genre] = 1
-        
-android_genre_freq = sorted(android_genre_freq.items(), key = 
-             lambda kv:(kv[1], kv[0]), reverse = True)
-
-print("\nFrequencies of genres in Android Apps : \n")
-
-for app, frequency in android_genre_freq:
-    print("{} : {}".format(app, frequency))
-
-
-for app in ios_free:
-    genre = app[ios_genre_index]
-    if genre in ios_genre_freq:
-        ios_genre_freq[genre] += 1
-    else:
-        ios_genre_freq[genre] = 1
-
-ios_genre_freq = sorted(ios_genre_freq.items(), key = 
-             lambda kv:(kv[1], kv[0]), reverse = True)
-print("\nFrequencies of genres in iOS Apps : \n")
-
-for app, frequency in ios_genre_freq:
-    print("{} : {}".format(app, frequency))
+display_table(ios_free, ios_genre_index, "iOS")
+display_table(android_free, android_genre_index, "Android")
